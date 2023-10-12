@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product List</title>
+</head>
+<body>
+  <form action="/addProduct" method="GET">
+    <input type="submit" value="Add Product" />
+  </form>
+
+  <h1>Product List</h1>
+  <ul>
+    <% products.forEach(product => { %>
+      <li>
+        <h2><%= product.name %></h2>
+        <p>Description: <%= product.description %></p>
+        <p>Price: $<%= product.price %></p>
+        <p>Stock: <%= product.stock %></p>
+      </li>
+    <% }); %>
+  </ul>
+</body>
+</html>
