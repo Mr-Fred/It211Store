@@ -1,0 +1,20 @@
+<!-- views/checkout.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+</head>
+<body>
+  <h1>Order Summary</h1>
+  <ul>
+    <% orderSummary.ordered_items.forEach(item => { %>
+      <li><%= item %></li>
+    <% }); %>
+  </ul>
+  <p>Total: <%= orderSummary.order_amount %></p>
+  <form action="/order" method="POST">
+    <input type="submit" value="Submit Order" />
+  </form>
+</body>
+</html>

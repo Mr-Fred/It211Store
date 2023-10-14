@@ -21,7 +21,7 @@ router.route('/product/:prod_id').get(async (req, res) => {
 
   try {
     const product = await shopper.getProductById(prod_id);
-    res.status(200).json(product);
+    res.render('product', {product});
   } catch (error) {
     console.error(error);
   }
@@ -31,10 +31,10 @@ router.route('/cart/addtocart').post(async (req, res) => {
 
   const shopper = new Shopper();
   const body = req.body;
-
   try {
     const addedToCart = await shopper.addToCart(body);
-    res.status(200).json(addedToCart);
+    res.status(200);
+    res.redirect('/');
   } catch (error) {
     console.error(error);
   }
@@ -43,8 +43,8 @@ router.route('/cart/addtocart').post(async (req, res) => {
 router.route('/cart').get( async (req, res) => {
   const shopper = new Shopper();
   try {
-    let cartItems = await shopper.readCart();
-    res.status(200).json(cartItems);
+    let cart = await shopper.readCart();
+    res.render('cart', {cart});
     
   } catch (error) {
     console.error(error);
@@ -52,38 +52,55 @@ router.route('/cart').get( async (req, res) => {
 
 });
 
-router.route('/cart/:prod_id').delete( async (req, res) => {
-  const shopper = await new Shopper();
-  
+router.route('/cart/:prod_id').post( async (req, res) => {
+  const shopper = new Shopper();
   try {
     let deletedProduct = await shopper.removeProd(req.params.prod_id);
     console.log(deletedProduct)
-    res.json(deletedProduct);
+    res.redirect('/cart');
   } catch (error) {
     console.log(error)
   }
   
 });
 
-router.route('/checkout').post(async (req, res) => {
+router.route('/checkout').get(async (req, res) => {
+ 
   const shopper = new Shopper();
 
   try {
-      let orderSummary = await shopper.checkout();
-      res.json(orderSummary);
+    let orderSummary = await shopper.submitOrder();
+    res.render('checkout', {orderSummary}); 
   } catch (error) {
     throw error
   }
+});
 
-  // try {
-  //   let carts = await shopper.readCart();
-  //   let total = await shopper.getTotal(carts);
-  //   console.log(total)
-  // } catch (error) {
-  //   throw error
-  // }
+router.route('/order').post(async (req, res) => {
+  const shopper = new Shopper();
+  const body = req.body;
+  try {
+    let orderSubmitted = await shopper.clearCart();
+    
+    if (orderSubmitted) {
+      res.redirect('/');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+
+
   
-})
+});
 
+router.route('/clear-orders').delete(async (req, res) => {
+  const shopper = new Shopper();
+  try {
+    let ordersCleared = await shopper.clearOrders();
+    res.json(ordersCleared);
+  } catch (error) {
+    throw error;
+  }
+});
 
 module.exports = router;

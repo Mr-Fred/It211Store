@@ -5,10 +5,18 @@
   <title>Product List</title>
 </head>
 <body>
+  
+<!-- button to create new product -->
   <form action="/addProduct" method="GET">
     <input type="submit" value="Add Product" />
   </form>
-
+  
+  <!-- button to display cart -->
+  <form action="/cart" method="GET">
+    <input type="submit" value="Go to Cart" />
+  </form>
+  
+  <!-- Display product list -->
   <h1>Product List</h1>
   <ul>
     <% products.forEach(product => { %>
@@ -17,6 +25,13 @@
         <p>Description: <%= product.description %></p>
         <p>Price: $<%= product.price %></p>
         <p>Stock: <%= product.stock %></p>
+        <form action="/cart/addtocart" method="POST">
+          <input type="hidden" name="product_name" value="<%= product.name %>" />
+          <input type="hidden" name="product_id" value="<%= product._id %>" />
+          <input type="hidden" name="price" value="<%= product.price %>" />
+          <input type="submit" value="Add to Cart" />
+        </form>
+        <button><a href="/product/<%= product.id %>">View</a></button>
       </li>
     <% }); %>
   </ul>

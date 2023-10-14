@@ -1,0 +1,42 @@
+<!-- views/cart.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart</title>
+</head>
+<body>
+  <form action="/" method="GET">
+    <input type="submit" value="Home" />
+  </form>
+  <h1>Cart</h1>
+  <ul>
+    <% cart.cartItems.forEach(item => { %>
+      <li>
+        <h2><%= item.product_name %></h2>
+        <p>Price: $<%= item.price %></p>
+        <!-- Use JavaScript to send a DELETE request -->
+        <form id="deleteForm<%= item._id %>" method="POST" action="/cart/<%= item._id %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Delete" onclick="deleteProduct('<%= item._id %>')" />
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+  <p>Total: $<%= cart.total %></p>
+  <form action="/checkout" method="GET">
+  <input type="submit" value="Checkout" />
+  </form>
+
+  <script>
+    // JavaScript function to send a DELETE request
+    function deleteProduct(productId) {
+      const confirmation = confirm("Are you sure you want to delete this product?");
+      if (confirmation) {
+        const form = document.getElementById(`deleteForm${productId}`);
+        form.submit();
+      }
+    }
+  </script>
+</body>
+</html>

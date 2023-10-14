@@ -5,7 +5,6 @@ const Orders = require('../models/orders.js');
 class Shopper {
 
   constructor() {
-      
     
     }
 
@@ -21,8 +20,6 @@ class Shopper {
       console.error('Error fetching products:', error);
       throw error;
     }
-    await this.readCart();
-    await this.getTotal();
   }
     
   async getProductById(prod_id) {
@@ -64,7 +61,9 @@ class Shopper {
 
     try {
       let cartItems = await Cart.find();
-      return cartItems;
+      let total = await this.getTotal(cartItems);
+      return {cartItems, total};
+      
     } catch (error) {
       throw error;
     }
@@ -87,49 +86,47 @@ class Shopper {
     
   }
 
-  async checkout() {
+  async submitOrder() {
     /*
-    receive a request to add all the data in cart collection to the order collection.
+    receive a request to add all the data in the cart collection to the order collection.
     */
-    let cartItems = await this.readCart();
-    let orderAmount = await this.getTotal(cartItems);
-
-    // orderAmount = await Promise.resolve(orderAmount);
-    
     try {
-
-      let orderedItems = [];
-      let orderedItemIds = [];
       
-      for (let i = 0; i < cartItems.length; i++) {
-         orderedItems.push(cartItems[i].product_name);
-         orderedItemIds.push(cartItems[i].product_id.toString());
+      let {cartItems, total} = await this.readCart();
 
-      }
-      
+      let orderedItemIds = cartItems.map(item => item._id.toString());
+      let orderedItems = cartItems.map(item => item.product_name);
+
+
       let body = {
         item_ids: orderedItemIds,
         ordered_items: orderedItems,
-        order_amount: orderAmount
+        order_amount: total
       }
-      console.log(orderedItemIds)
+
       const orders = new Orders(body);
       await orders.save();
       return orders;
       
     } catch (error) {
-      throw error;
+      return error;
     }
-      
   }
 
-  async submitOrder() {
+  async clearCart() {
     /*
-    receive a post request to add all the products in cart to a Order collection. 
-    
+    receive a delete request to clear the product in the cart.
     */
+    try {
+      
+      let cleared = await Cart.deleteMany({})
+      // await Cart.db.collection.drop('orders');
+      console.log("Order submitted and Cart Cleared");
+      return true;
+    } catch (error) {
+      throw error
+    }
   }
-
   async removeProd(prod_id) {
     /*
     receive a put request to decrement the stock value of prod_id in products collection.
@@ -139,6 +136,21 @@ class Shopper {
         return product;
     } catch (error) {
       throw error;
+    }
+  }
+
+  async clearOrders() {
+    /*
+    receive a delete request to clear the orders collection.
+    */
+    try {
+      
+      let cleared = await Orders.deleteMany({})
+      // await Cart.db.collection.drop('orders');
+      console.log("Orders collection cleared");
+      return true;
+    } catch (error) {
+      throw error
     }
   }
   
