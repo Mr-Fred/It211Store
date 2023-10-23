@@ -93,8 +93,7 @@ class Shopper {
     try {
       
       let {cartItems, total} = await this.readCart();
-
-      let orderedItemIds = cartItems.map(item => item._id.toString());
+      let orderedItemIds = cartItems.map(item => item.product_id.toString());
       let orderedItems = cartItems.map(item => item.product_name);
 
 

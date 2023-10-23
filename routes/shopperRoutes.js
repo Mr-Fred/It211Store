@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Shopper = require('../controllers/shopper.js')
+const Inventory = require('../controllers/inventory.js');
 
 router.route('/').get(async (req, res) => {
   try {
@@ -56,7 +57,7 @@ router.route('/cart/:prod_id').post( async (req, res) => {
   const shopper = new Shopper();
   try {
     let deletedProduct = await shopper.removeProd(req.params.prod_id);
-    console.log(deletedProduct)
+    
     res.redirect('/cart');
   } catch (error) {
     console.log(error)
@@ -70,7 +71,9 @@ router.route('/checkout').get(async (req, res) => {
 
   try {
     let orderSummary = await shopper.submitOrder();
+    
     res.render('checkout', {orderSummary}); 
+    
   } catch (error) {
     throw error
   }
@@ -78,20 +81,30 @@ router.route('/checkout').get(async (req, res) => {
 
 router.route('/order').post(async (req, res) => {
   const shopper = new Shopper();
-  const body = req.body;
+  const body = req.body.item_ids.split(',');
+  const inventory = new Inventory();
+
   try {
-    let orderSubmitted = await shopper.clearCart();
-    
-    if (orderSubmitted) {
-      res.redirect('/');
+
+    let updatedProducts = await inventory.updateStock(body);
+    if(updatedProducts) {
+      let orderSubmitted = await shopper.clearCart();
+
+      if (orderSubmitted) {
+        res.redirect('/thankyou');
+      }
     }
   } catch (error) {
     console.error(error);
   }
 
-
+  router.route('/thankyou').get((req, res) => {
+    res.render('thankyou');
+  });
   
 });
+
+
 
 router.route('/clear-orders').delete(async (req, res) => {
   const shopper = new Shopper();

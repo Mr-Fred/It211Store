@@ -12,8 +12,10 @@
       <li><%= item %></li>
     <% }); %>
   </ul>
+      
   <p>Total: <%= orderSummary.order_amount %></p>
   <form action="/order" method="POST">
+    <input type="hidden" name="item_ids" value="<%= orderSummary.item_ids %>"/>
     <input type="submit" value="Submit Order" />
   </form>
 </body>

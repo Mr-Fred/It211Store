@@ -1,4 +1,4 @@
-const Product = require('/home/runner/It211Store/models/products.js');
+const Product = require('../models/products');
 const database = require('../models/database.js');
 
 // const cnx = new Database();
@@ -61,6 +61,26 @@ class Inventory {
       throw error
     }
   }
+
+  async updateStock(body) {
+    const updatedProducts = [];
+    for (let i = 0; i < body.length; i++) {
+      const filter = { _id: body[i] }; 
+      const update = { $inc: {stock: -1} };
+      
+  
+      try {
+        const updatedProduct = await Product.findByIdAndUpdate(filter, update, {new: true});
+       
+        if (updatedProduct) {
+          updatedProducts.push(updatedProduct);
+        }
+      } catch (error) {
+        throw error;
+      }
+  }
+  return updatedProducts;
+}
 }
 
 module.exports = Inventory;
