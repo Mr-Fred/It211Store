@@ -1,0 +1,225 @@
+.product {
+ display: inline-block;
+ margin: 5px;
+}
+
+#basketImage {
+ position: absolute;
+ right: 16px;
+ top: 16px;
+}
+
+#itemCounter {
+ position: absolute;
+ right: 56px;
+ top: 0px;
+}
+
+#orderTotal {
+ margin-right: 16px;
+ text-align: right;
+}
+
+.hero2{
+    position: relative;
+    background-image: url(/img/backgrounds/paper-background.png);
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    width: auto;
+    height: 100vh;
+    overflow: hidden;
+    margin-bottom: 4rem;
+}
+
+.new-arrival {
+    position: absolute;
+    height: 100%;
+}
+
+.title {
+    position: relative;
+    content: "The Shop";
+    overflow: hidden;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+.hero-title-container {
+    position: absolute;
+    width: fit-content;
+    height: auto;
+    z-index: 5;
+    top: 16vh;
+    right: 8vw;
+    align-items: end;
+    overflow: hidden;
+}
+
+.title h1, .title h3 {
+    color: var(--offwhite001);
+}
+
+#hero-title {
+    font-size: 9rem;
+    text-transform: uppercase;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    transform: rotate(5deg);
+}
+
+.title h3 {
+    position: relative;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    font-size: 3rem;
+
+}
+
+.paper-container {
+    position: absolute;
+    bottom: 0px;
+    width: 120%;
+    height: 400px;
+    overflow: visible;
+    transform: rotate(5deg) !important;
+}
+
+.paper {
+    position: absolute;
+    width: 2000px;
+    height: auto;
+    bottom: -250px;
+}
+
+.glide, .glide__track, .glide__slides {
+    height: 100%;
+}
+
+.glide__track {
+    gap: 0;
+}
+
+.glide__slide {
+    border: 15px solid transparent;
+    border-width: 30px 12px;
+    border-image: url('/img/backgrounds/frame-background.png') 30 round;
+    margin: 0 !important;
+    overflow: hidden;
+}
+
+.glide__slide img {
+    position: relative;
+    height: auto;
+    width: 100%;
+}
+
+.overlap{
+    position: absolute;
+    width: 2000px;
+    height: 100px;
+    bottom: -60px;
+    left: -10px;
+    background-color: var(--offwhite001);
+    transform: rotate(3deg);
+}
+
+#products {
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+}
+
+.search-box {
+    width: fit-content;
+    border: solid 1px grey;
+}
+
+.search-box input, .search-box input:focus{
+    border: none;
+    outline: none;
+}
+
+.search-box span {
+    color: var(--grey001);
+}
+
+.search-box input{
+    padding: 0.5rem;
+    width: 30vw;
+    min-width: 200px;
+    background-color: transparent;
+}
+
+.products-container {
+    width: 70%;
+}
+
+.products-container .products-title {
+    width: 100%;
+    height: auto;
+    margin-bottom: 3rem;
+}
+
+.products-title h1 {
+    color: var(--grey001);
+    font-size: 2.6rem;
+}
+
+.product-card{
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
+    background-color: var(--grey002);
+    color: var(--offwhite001);
+    height: 250px;
+    width: 200px;
+    transition: all ease-in-out 0.3s;
+    /* text-decoration: none; */
+}
+
+.product-card:hover{
+    background-color: var(--grey001);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.product-card p{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+}
+
+.product-card a{
+    text-decoration: none;
+}
+
+.product-card form {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.product-card form .submit {
+    width: auto;
+    height: 100%;
+    border: none;
+    padding: 0.5rem;
+    background-color: var(--grey001);
+    overflow: hidden;
+    transition: all ease-in-out 0.2s;
+}
+
+.product-card form .submit:hover {
+    background-color: var(--grey002);
+}
+
+#submit-button{
+    background-color: transparent;
+    color: var(--offwhite001);
+    font-weight: bolder;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding-left: 1rem;
+}

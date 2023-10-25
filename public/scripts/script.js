@@ -1,4 +1,6 @@
-function addToCart(item) {
+AOS.init();
+
+/*function addToCart(item) {
  cartItems.push(item);
  document.getElementById("itemCounter").innerHTML = cartItems.length;
  showTotal();
@@ -20,5 +22,5 @@ function clickCart() {
   }
   orderTotal.innerHTML += "Total: $" + total;
  }
-}
+}*/
 

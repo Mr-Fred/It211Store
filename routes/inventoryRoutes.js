@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Inventory = require('../controllers/inventory.js');
 
-router.route('/addProduct').get((req, res) => {
-  res.sendFile("/home/runner/It211Store/views/create.html");
+router.route('/addProduct').get(async (req, res) => {
+  res.render('create');
 });
 
 router.route('/addproduct').post(async (req, res) => {
