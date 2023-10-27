@@ -27,7 +27,5 @@ app.use('/', require('./routes/inventoryRoutes'));
 
 app.listen(80, () => {
   console.log('listenting on port 80')
-  console.log(__dirname + 'node_modules')
-  console.log(process.env['URI'])
 })
 

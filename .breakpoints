@@ -1,0 +1,20 @@
+{
+  "files": {
+    "routes/inventoryRoutes.js": [
+      {
+        "id": "77a4c87b-9bc6-4735-beb8-e3868c8dae93",
+        "line": 8,
+        "version": 1804,
+        "index": 233
+      }
+    ],
+    "views/cart.ejs": [
+      {
+        "id": "990ff88c-515c-4ebe-a38c-7b939cc3bd36",
+        "line": 1,
+        "version": 179,
+        "index": 0
+      }
+    ]
+  }
+}

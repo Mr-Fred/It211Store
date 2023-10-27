@@ -6,3 +6,9 @@
     background-color: var(--grey002);
     padding: 2rem;
 }
+
+.prod_img {
+  width: 1%;
+  height: 1%;
+  /* padding: 2rem */
+}

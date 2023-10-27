@@ -1,14 +1,28 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const Inventory = require('../controllers/inventory.js');
+const storageHandlers = require('../controllers/storageHandlers.js');
+
+
+const storage = multer.diskStorage({
+  destination: storageHandlers.uploadsDestHandler,
+  filename: storageHandlers.uploadsFilenameHandler
+});
+
+
+const upload = multer({storage: storage});
 
 router.route('/addProduct').get(async (req, res) => {
   res.render('create');
 });
 
-router.route('/addproduct').post(async (req, res) => {
-  const inventory = new Inventory(req.body);
+router.route('/addproduct').post(upload.single('uploaded_file'), async (req, res) => {
+  
   try {
+    let productDoc = req.body;
+    productDoc.image = req.file.path;
+    const inventory = new Inventory(productDoc);
     const savedProd = await inventory.addProd();
     res.redirect('/');
     
@@ -16,7 +30,6 @@ router.route('/addproduct').post(async (req, res) => {
     res.status(500).json({error: 'Error creating product'});
   }
 });
-
 
 router.route('/product/:prod_id').put(async (req, res) => {
   const inventory = new Inventory(req.body);
@@ -43,4 +56,4 @@ router.route('/product/:prod_id').delete(async (req, res) => {
   }
 });
                                       
-module.exports = router;
+module.exports = router;  

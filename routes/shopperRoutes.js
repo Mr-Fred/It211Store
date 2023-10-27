@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 const Shopper = require('../controllers/shopper.js')
 const Inventory = require('../controllers/inventory.js');
+// app.use(express.static(path.join(__dirname,'public')));
+
+// let publicPath = path.join(__dirname, '../public');
 
 router.route('/').get(async (req, res) => {
   try {
     const shopper = new Shopper();
     const products = await shopper.readAllProds();
-
     res.render('index', {products});
   } catch (error) {
     console.error('Error fecting products:', error);
@@ -103,8 +106,6 @@ router.route('/order').post(async (req, res) => {
   });
   
 });
-
-
 
 router.route('/clear-orders').delete(async (req, res) => {
   const shopper = new Shopper();
