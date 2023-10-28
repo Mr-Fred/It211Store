@@ -18,7 +18,12 @@
   <% var rootPath = '../'; %>
   <%- include(rootPath + 'public/components/nav.html'); %>
 
+
   <section id="product-details" class="flex centered column wrap">
+    <form id="deleteForm<%= product._id %>" method="POST" action="/product/<%= product._id %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete" onclick="deleteProduct('<%= product._id %>')"/>
+    </form>
     <div class="product-details-card flex centered column embosed rounded" data-aos="fade-up" data-aos-duration="500">
       <h1>Product Details</h1>
       <h2><%= product.name %></h2>
@@ -38,5 +43,6 @@
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="/scripts/script.js"></script>
+  <script src="/scripts/cart.js"></script>
 </body>
 </html>

@@ -3,5 +3,6 @@ function deleteProduct(productId) {
     if (confirmation) {
       const form = document.getElementById(`deleteForm${productId}`);
       form.submit();
+      console.log('form submitted')
     }
 }

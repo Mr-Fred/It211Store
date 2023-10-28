@@ -60,7 +60,7 @@
         <% products.forEach(product => { %>
           <a href="/product/<%= product.id %>" alt="<%=product.name%> image">
             <div class="product-card flex centered column rounded embosed">
-              <img class="product-card flex centered column rounded embosed" src="<%= product.image %>" >
+              <img class="product-card flex centered column rounded embosed" src="<%= product.image_url %>" >
               <h2><%= product.name %></h2>  
               <p><%= product.description %></p>
               <p>Price: $<%= product.price %></p>

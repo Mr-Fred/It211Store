@@ -17,13 +17,14 @@ router.route('/addProduct').get(async (req, res) => {
   res.render('create');
 });
 
-router.route('/addproduct').post(upload.single('uploaded_file'), async (req, res) => {
+router.route('/addproduct').post(upload.none('image_url'), async (req, res) => {
   
   try {
-    let productDoc = req.body;
-    productDoc.image = req.file.path;
-    const inventory = new Inventory(productDoc);
-    const savedProd = await inventory.addProd();
+    // let productDoc = req.body;
+    // productDoc.image = req.file.path;
+    
+    const inventory = new Inventory(req.body);
+    await inventory.addProd();
     res.redirect('/');
     
   } catch (error) {
@@ -44,13 +45,13 @@ router.route('/product/:prod_id').put(async (req, res) => {
   
 });
 
-router.route('/product/:prod_id').delete(async (req, res) => {
+router.route('/product/:prod_id').post(async (req, res) => {
   const inventory = new Inventory(req.body);
   const prod_id = req.params.prod_id;
   
   try {
     let deletedProduct = await inventory.deleteProduct(prod_id);
-    res.json(deletedProduct);
+    res.redirect('/');
   } catch (error) {
     throw error;
   }
