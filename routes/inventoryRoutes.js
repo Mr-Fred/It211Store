@@ -1,22 +1,36 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const Inventory = require('../controllers/inventory.js');
+const storageHandlers = require('../controllers/storageHandlers.js');
 
-router.route('/addProduct').get((req, res) => {
-  res.sendFile("/home/runner/It211Store/views/create.html");
+
+const storage = multer.diskStorage({
+  destination: storageHandlers.uploadsDestHandler,
+  filename: storageHandlers.uploadsFilenameHandler
 });
 
-router.route('/addproduct').post(async (req, res) => {
-  const inventory = new Inventory(req.body);
+
+const upload = multer({storage: storage});
+
+router.route('/addProduct').get(async (req, res) => {
+  res.render('create');
+});
+
+router.route('/addproduct').post(upload.none('image_url'), async (req, res) => {
+  
   try {
-    const savedProd = await inventory.addProd();
+    // let productDoc = req.body;
+    // productDoc.image = req.file.path;
+    
+    const inventory = new Inventory(req.body);
+    await inventory.addProd();
     res.redirect('/');
     
   } catch (error) {
     res.status(500).json({error: 'Error creating product'});
   }
 });
-
 
 router.route('/product/:prod_id').put(async (req, res) => {
   const inventory = new Inventory(req.body);
@@ -31,16 +45,16 @@ router.route('/product/:prod_id').put(async (req, res) => {
   
 });
 
-router.route('/product/:prod_id').delete(async (req, res) => {
+router.route('/product/:prod_id').post(async (req, res) => {
   const inventory = new Inventory(req.body);
   const prod_id = req.params.prod_id;
   
   try {
     let deletedProduct = await inventory.deleteProduct(prod_id);
-    res.json(deletedProduct);
+    res.redirect('/');
   } catch (error) {
     throw error;
   }
 });
                                       
-module.exports = router;
+module.exports = router;  
