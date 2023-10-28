@@ -20,7 +20,7 @@
   <!-- Display product list -->
   <div class="hero2 centered flex row">
     <div class="hero-title-container flex column" data-aos="flip-up" data-aos-duration="500">
-      <h1 id="hero-title" class="title">The Shop</h1>
+      <h1 id="hero-title" class="title">IT211Store</h1>
       <!--h3>new arrivals</h3-->
     </div>
     <img src="/img/elements/new-arrival.png" class="new-arrival flex centered full-width" alt="new-arrival">
@@ -48,7 +48,7 @@
   <section id="products" class="flex centered column full-width">
     <div class="products-container column flex centered row" data-aos="fade-up" data-aos-duration="1000">
       <div class="products-title flex full-width auto-margin wrap">
-        <h1>Products List</h1>
+        <h1>IT211Store</h1>
         <div class="search-box flex rounded centered">
           <span class="material-symbols-outlined">
             Search
@@ -59,23 +59,32 @@
       <div class="listings flex gap full-width auto-margin wrap">
         <% products.forEach(product => { %>
           <a href="/product/<%= product.id %>" alt="<%=product.name%> image">
-            <div class="product-card flex centered column rounded embosed">
-              <img class="product-card flex centered column rounded embosed" src="<%= product.image %>" >
-              <h2><%= product.name %></h2>  
-              <p><%= product.description %></p>
-              <p>Price: $<%= product.price %></p>
-              <p>Stock: <%= product.stock %></p>
-              <form action="/cart/addtocart" method="POST">
-                <input type="hidden" name="product_name" value="<%= product.name %>" />
-                <input type="hidden" name="product_id" value="<%= product._id %>" />
-                <input type="hidden" name="price" value="<%= product.price %>" />
-                <div class="submit flex auto-margin">
-                  <span class="material-symbols-outlined">
-                    shopping_cart
-                  </span>
-                  <input id="submit-button" type="submit" value="Add to Cart" />
+            <div class="product-card flex centered-x column rounded embosed">
+              <div class="product-contents flex centered-x column auto-margin full-width full-height">
+                <img class="product-image flex" src="<%= product.image %>" >
+                <div class="product-desc flex row auto-margin gap">
+                  <div>
+                    <h2><%= product.name %></h2>  
+                    <p><%= product.description %></p>
+                  </div>
+                  <div>
+                    <p>Price: $<%= product.price %></p>
+                    <p>Stock: <%= product.stock %></p>
+                  </div>
+                  
                 </div>
-              </form>
+                <form action="/cart/addtocart" method="POST">
+                  <input type="hidden" name="product_name" value="<%= product.name %>" />
+                  <input type="hidden" name="product_id" value="<%= product._id %>" />
+                  <input type="hidden" name="price" value="<%= product.price %>" />
+                  <div class="submit flex auto-margin">
+                    <span class="material-symbols-outlined">
+                      shopping_cart
+                    </span>
+                    <input id="submit-button" type="submit" value="Add to Cart" />
+                  </div>
+                </form>
+              </div>
             </div>
           </a>
         <% }); %>

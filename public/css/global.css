@@ -27,6 +27,14 @@ body {
     display: flex;
 }
 
+.centered-x{
+    justify-items: center;
+}
+
+.centered-y{
+    align-items: center;
+}
+
 .centered {
     align-items: center;
     justify-items: center;
@@ -61,6 +69,10 @@ body {
 .full-width{
     width: 100%;
 }
+.full-height{
+    width: 100%;
+}
+
 
 .gap {
     gap: 1rem;
