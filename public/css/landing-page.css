@@ -39,7 +39,7 @@
 
 .title {
     position: relative;
-    content: "The Shop";
+    content: "IT211Store";
     overflow: hidden;
     text-transform: uppercase;
     font-weight: bolder;
@@ -168,11 +168,10 @@
 .product-card{
     position: relative;
     overflow: hidden;
-    padding: 1rem;
     background-color: var(--grey002);
     color: var(--offwhite001);
-    height: 250px;
-    width: 200px;
+    height: 300px;
+    width: 300px;
     transition: all ease-in-out 0.3s;
     /* text-decoration: none; */
 }
@@ -223,3 +222,26 @@
     cursor: pointer;
     padding-left: 1rem;
 }
+
+
+.product-image {
+    position: relative;
+    width: 100%;
+    height: -webkit-fill-available;
+    top: 0;
+}
+
+.product-contents {
+    height: 85%;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-desc {
+    justify-content: space-between;
+    overflow: hidden;
+    height: 120px;
+
+}
+
