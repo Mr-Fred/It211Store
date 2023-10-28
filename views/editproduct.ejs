@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Product</title>
+  </head>
+  <body>
+    <!-- button to create new product -->
+    <form action="/addProduct" method="GET">
+      <input type="submit" value="Add Product" />
+    </form>
+
+    <!-- button to display cart -->
+    <form action="/cart" method="GET">
+      <input type="submit" value="Go to Cart" />
+    </form>
+
+    <h1>Edit Product</h1>
+    <form class="product-form" action="/product/edit-product" method="POST">
+      <div class="form-control">
+        <label for="product_name">Product Name</label>
+        <input
+          type="text"
+          name="product_name"
+          id="product_name"
+          value="<%= product.name %>"
+        />
+      </div>
+      <div class="form-control">
+        <label for="description">Product Description</label>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          value="<%= product.description %>"
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="price">Product Price</label>
+        <input
+          type="text"
+          name="price"
+          id="price"
+          value="<%= product.price %>"
+        />
+      </div>
+      <div class="form-control">
+        <label for="stock">Stock</label>
+        <input
+          type="text"
+          name="stock"
+          id="stock"
+          value="<%= product.stock %>"
+        />
+      </div>
+
+      <input type="hidden" value="<%= product._id%>" name="product_id" />
+      <button><a href="/product/<%= product.id %>">Update Product</a></button>
+    </form>
+    <!-- Display product list -->
+  </body>
+</html>
